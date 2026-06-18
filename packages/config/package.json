@@ -10,7 +10,7 @@
     "./prettier": "./prettier.config.js"
   },
   "peerDependencies": {
-    "eslint": ">=9",
+    "eslint": "^9",
     "prettier": ">=3"
   },
   "dependencies": {
