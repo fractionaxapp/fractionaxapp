@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
-type: "library"
+layer: "library"
 language: "typescript"
 stack: "infrastructure"
 tags: ["shared", "config"]

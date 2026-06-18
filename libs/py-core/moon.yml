@@ -1,9 +1,51 @@
 # yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
-type: "library"
+layer: "library"
 language: "python"
 stack: "infrastructure"
-tags: ["shared", "py-library"]
+tags: ["shared", "py", "py-library"]
+toolchains:
+  default: ["python"]
 project:
   name: "py-core"
   description: "Shared Python utilities and domain primitives."
-# Inherits install/test/lint/format/typecheck from .moon/tasks/python.yml.
+
+fileGroups:
+  sources:
+    - "src/**/*"
+  tests:
+    - "tests/**/*"
+
+# uv manages the virtualenv, so tasks are toolchain-agnostic.
+tasks:
+  install:
+    command: "uv sync --all-extras"
+    inputs:
+      - "pyproject.toml"
+  test:
+    command: "uv run pytest"
+    deps:
+      - "~:install"
+    inputs:
+      - "@group(sources)"
+      - "@group(tests)"
+      - "pyproject.toml"
+  lint:
+    command: "uv run ruff check ."
+    deps:
+      - "~:install"
+    inputs:
+      - "@group(sources)"
+      - "pyproject.toml"
+  format:
+    command: "uv run ruff format --check ."
+    deps:
+      - "~:install"
+    inputs:
+      - "@group(sources)"
+  typecheck:
+    command: "uv run mypy src"
+    deps:
+      - "~:install"
+    inputs:
+      - "@group(sources)"
+      - "pyproject.toml"

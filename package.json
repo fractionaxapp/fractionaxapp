@@ -22,7 +22,7 @@
     "submodule:sync": "git submodule update --init --recursive --remote"
   },
   "devDependencies": {
-    "@moonrepo/cli": "^1.36.1",
+    "@moonrepo/cli": "^2.3.3",
     "eslint": "^9.28.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3"

@@ -1,16 +1,35 @@
 # yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
-type: "library"
+layer: "library"
 language: "typescript"
 stack: "frontend"
-tags: ["shared", "ui", "react"]
+tags: ["shared", "ts", "ui", "react"]
+toolchains:
+  default: ["node"]
 project:
   name: "ui"
   description: "Shared React component library."
 dependsOn:
   - "core"
-# 'test' is disabled until component tests are added.
+
+fileGroups:
+  sources:
+    - "src/**/*"
+
 tasks:
-  test:
-    command: "noop"
-    options:
-      cache: false
+  build:
+    command: "pnpm exec tsc --build"
+    inputs:
+      - "@group(sources)"
+      - "tsconfig.json"
+    outputs:
+      - "dist"
+  lint:
+    command: "pnpm exec eslint ."
+    inputs:
+      - "@group(sources)"
+      - "eslint.config.js"
+  typecheck:
+    command: "pnpm exec tsc --noEmit"
+    inputs:
+      - "@group(sources)"
+      - "tsconfig.json"
