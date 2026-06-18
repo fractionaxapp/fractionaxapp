@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/workspace.json
+#
+# Defines where moon discovers projects. Each submodule dropped into one of these
+# folders is auto-detected as a project as long as it has a `moon.yml` (or a
+# package.json / pyproject.toml that moon can infer from).
+
+projects:
+  globs:
+    - "apps/*"
+    - "services/*"
+    - "ai/*"
+    - "packages/*"
+    - "libs/*"
+
+vcs:
+  manager: "git"
+  defaultBranch: "main"
+  # Treat submodules as part of the workspace for `moon query` / affected detection.
+  hooks: {}
+
+# Hash & remote-cache settings — flip remote caching on once a backend is configured.
+runner:
+  cacheLifetime: "7 days"
+  inheritColorsForPipedTasks: true
+
+# Generators for scaffolding new projects (see /scripts and templates/ when added).
+generator:
+  templates:
+    - "./templates"

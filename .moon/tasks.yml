@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/tasks.json
+#
+# Universal tasks inherited by EVERY project (any language). Language-specific
+# defaults live in .moon/tasks/node.yml and .moon/tasks/python.yml and are merged
+# on top of these. Individual projects override anything in their own moon.yml.
+
+fileGroups:
+  sources:
+    - "src/**/*"
+  tests:
+    - "tests/**/*"
+    - "**/*.test.*"
+    - "**/*.spec.*"
+  configs:
+    - "*.{js,cjs,mjs,json,yml,yaml,toml}"
