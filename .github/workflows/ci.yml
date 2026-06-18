@@ -15,11 +15,12 @@ jobs:
     name: Lint, typecheck, test (affected)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
-          # Submodules + full history so moon can diff against the base for
-          # affected-project detection.
-          submodules: recursive
+          # Full history so moon can diff against the base for affected-project
+          # detection. Submodules are intentionally NOT fetched: this CI validates
+          # the in-repo packages only, and each submodule runs its own CI. moon
+          # ignores uninitialised submodule directories.
           fetch-depth: 0
 
       - name: Install proto (toolchain manager)
