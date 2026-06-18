@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+type: "library"
+language: "typescript"
+stack: "frontend"
+tags: ["shared", "ui", "react"]
+project:
+  name: "ui"
+  description: "Shared React component library."
+dependsOn:
+  - "core"
+# 'test' is disabled until component tests are added.
+tasks:
+  test:
+    command: "noop"
+    options:
+      cache: false
