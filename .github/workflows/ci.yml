@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint, typecheck, test (affected)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Submodules + full history so moon can diff against the base for
+          # affected-project detection.
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install proto (toolchain manager)
+        uses: moonrepo/setup-toolchain@v0
+        with:
+          auto-install: true
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check affected projects
+        run: moon ci --color
+        env:
+          MOON_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          MOON_HEAD: ${{ github.sha }}
