@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+type: "library"
+language: "python"
+stack: "infrastructure"
+tags: ["shared", "py-library"]
+project:
+  name: "py-core"
+  description: "Shared Python utilities and domain primitives."
+# Inherits install/test/lint/format/typecheck from .moon/tasks/python.yml.
