@@ -1,0 +1,13 @@
+# Default owners for everything in the meta-repo.
+*                       @fractionaxapp/platform
+
+# Shared building blocks
+/packages/              @fractionaxapp/platform
+/libs/                  @fractionaxapp/platform
+/.moon/                 @fractionaxapp/platform
+/.github/               @fractionaxapp/platform
+
+# Submodule pointers — code is owned in each submodule's own repo.
+/apps/                  @fractionaxapp/web
+/services/              @fractionaxapp/backend
+/ai/                    @fractionaxapp/ai
