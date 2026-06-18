@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+type: "library"
+language: "typescript"
+stack: "infrastructure"
+tags: ["shared", "ts-library"]
+project:
+  name: "core"
+  description: "Shared TypeScript utilities, types and business primitives."
+# Inherits build/test/lint/typecheck from .moon/tasks/node.yml.
