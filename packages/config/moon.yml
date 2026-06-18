@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+type: "library"
+language: "typescript"
+stack: "infrastructure"
+tags: ["shared", "config"]
+project:
+  name: "config"
+  description: "Shared ESLint and Prettier configuration."
+# Config-only package — nothing to build or test.
+tasks: {}
