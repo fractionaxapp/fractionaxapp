@@ -28,22 +28,55 @@ reviewable step.
 
 ## Project conventions
 
-Every project (in-repo package or submodule) MUST have a `moon.yml` with:
+Every project (in-repo package or submodule) MUST have a `moon.yml`. Tasks are
+defined **inline per project** — moon 2.x merges any shared `.moon/tasks/*.yml`
+into every project regardless of language, so we keep tasks local to avoid the
+Node and Python task sets colliding. Use the templates below as a starting point.
+
+**TypeScript project** (`packages/core/moon.yml` is the reference):
 
 ```yaml
-type: "application" | "library" | "tool"
-language: "typescript" | "python" | "go" | ...
-stack: "frontend" | "backend" | "infrastructure"
-tags: ["..."]          # used for task filtering & boundary enforcement
-dependsOn: ["core"]    # other projects this depends on
+layer: "library" # application | library | tool
+language: "typescript"
+stack: "infrastructure" # frontend | backend | infrastructure
+tags: ["shared", "ts"]
+toolchains:
+  default: ["node"]
+project:
+  name: "<name>"
+  description: "<one line>"
+fileGroups:
+  sources: ["src/**/*"]
+  tests: ["src/**/*.test.ts"]
+tasks:
+  build: { command: "pnpm exec tsc --build", outputs: ["dist"] }
+  lint: { command: "pnpm exec eslint ." }
+  test: { command: "pnpm exec vitest run" }
+  typecheck: { command: "pnpm exec tsc --noEmit" }
 ```
 
-- **TypeScript** projects inherit `build/dev/test/lint/typecheck` from
-  [`.moon/tasks/node.yml`](.moon/tasks/node.yml).
-- **Python** projects inherit `install/dev/test/lint/format/typecheck` from
-  [`.moon/tasks/python.yml`](.moon/tasks/python.yml).
+**Python project** (`libs/py-core/moon.yml` is the reference):
 
-Override or add tasks per project in its own `moon.yml`.
+```yaml
+layer: "library"
+language: "python"
+stack: "infrastructure"
+tags: ["shared", "py"]
+toolchains:
+  default: ["python"]
+project:
+  name: "<name>"
+  description: "<one line>"
+tasks:
+  install: { command: "uv sync --all-extras" }
+  lint: { command: "uv run ruff check .", deps: ["~:install"] }
+  test: { command: "uv run pytest", deps: ["~:install"] }
+  typecheck: { command: "uv run mypy src", deps: ["~:install"] }
+```
+
+Node tasks run local binaries through `pnpm exec` so they resolve from the
+workspace `node_modules`. Config-only packages (e.g. `tsconfig`, `config`)
+declare no tasks.
 
 ## Quality gates
 

@@ -33,7 +33,7 @@ fractionaxapp/
 │   └── ui/       #   @fractionax/ui       — shared React component library
 ├── libs/         # Shared in-repo libs in other languages
 │   └── py-core/  #   fractionax-core      — shared Python primitives
-├── .moon/        # moon workspace, toolchain & inherited tasks
+├── .moon/        # moon workspace & toolchain config (tasks are per-project)
 ├── .prototools   # pinned toolchain versions
 └── scripts/      # automation (add-submodule, …)
 ```
