@@ -1,0 +1,29 @@
+{
+  "name": "fractionaxapp",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Fractionax polyglot meta-monorepo — orchestrates submodule projects across Node/TS, Python and AI stacks via moon.",
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "setup": "proto install && pnpm install && moon sync projects",
+    "build": "moon run :build",
+    "dev": "moon run :dev",
+    "test": "moon run :test",
+    "lint": "moon run :lint",
+    "typecheck": "moon run :typecheck",
+    "check": "moon check --all",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "submodule:add": "bash scripts/add-submodule.sh",
+    "submodule:sync": "git submodule update --init --recursive --remote"
+  },
+  "devDependencies": {
+    "@moonrepo/cli": "^1.36.1",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  }
+}

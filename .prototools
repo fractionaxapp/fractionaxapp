@@ -1,0 +1,9 @@
+# proto pins every toolchain so all submodules build reproducibly.
+# Install proto (https://moonrepo.dev/proto) then run `proto install` at the repo root.
+# Bump versions here and every contributor/CI picks them up automatically.
+
+node = "22.16.0"
+pnpm = "10.11.0"
+python = "3.13.3"
+uv = "0.7.8"
+moon = "1.36.1"

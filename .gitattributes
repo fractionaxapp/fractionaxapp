@@ -1,0 +1,15 @@
+# Normalize line endings
+* text=auto eol=lf
+
+# Binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
+# Lockfiles — keep but collapse in diffs
+pnpm-lock.yaml linguist-generated=true -diff
+uv.lock linguist-generated=true -diff

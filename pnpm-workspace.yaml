@@ -1,0 +1,8 @@
+# JS/TS workspace globs. Python submodules (no package.json) are simply ignored
+# by pnpm and orchestrated by moon instead. Keep these in sync with .moon/workspace.yml.
+packages:
+  - "packages/*"
+  - "apps/*"
+  - "services/*"
+  - "ai/*"
+  - "libs/*"

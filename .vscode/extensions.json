@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "moonrepo.moon-console",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "charliermarsh.ruff",
+    "ms-python.python",
+    "ms-python.mypy-type-checker"
+  ]
+}
