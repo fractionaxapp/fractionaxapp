@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+type: "library"
+language: "typescript"
+stack: "infrastructure"
+tags: ["shared", "config"]
+project:
+  name: "tsconfig"
+  description: "Shared TypeScript base configurations."
+# Config-only package — no build/test/lint tasks.
+tasks: {}
