@@ -30,6 +30,7 @@ tasks:
     inputs:
       - "@group(sources)"
       - "@group(tests)"
+      - "/test-fixtures/money-cases.json"
   lint:
     command: "pnpm exec eslint ."
     inputs:

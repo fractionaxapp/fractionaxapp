@@ -1,0 +1,9 @@
+{
+  "_comment": "Shared money cases asserted by both @fractionax/core (TS) and py-core (Python) so the two implementations stay in parity. amount is integer minor units.",
+  "normalize": [
+    { "amount": 10000, "currency": "usd", "expected": { "amount": 10000, "currency": "USD" } },
+    { "amount": 1, "currency": "EUR", "expected": { "amount": 1, "currency": "EUR" } },
+    { "amount": 250, "currency": "gbp", "expected": { "amount": 250, "currency": "GBP" } },
+    { "amount": 999999, "currency": "Jpy", "expected": { "amount": 999999, "currency": "JPY" } }
+  ]
+}

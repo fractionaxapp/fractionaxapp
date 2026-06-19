@@ -29,6 +29,7 @@ tasks:
       - "@group(sources)"
       - "@group(tests)"
       - "pyproject.toml"
+      - "/test-fixtures/money-cases.json"
   lint:
     command: "uv run ruff check ."
     deps:
