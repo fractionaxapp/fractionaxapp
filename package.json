@@ -9,7 +9,8 @@
     "pnpm": ">=10"
   },
   "scripts": {
-    "setup": "proto install && pnpm install && moon sync projects",
+    "setup": "proto install && pnpm install && moon sync projects && bash scripts/setup-hooks.sh",
+    "hooks:install": "bash scripts/setup-hooks.sh",
     "build": "moon run :build",
     "dev": "moon run :dev",
     "test": "moon run :test",
