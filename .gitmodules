@@ -4,3 +4,6 @@
 [submodule "services/api"]
 	path = services/api
 	url = https://github.com/fractionaxapp/api.git
+[submodule "ai/agents"]
+	path = ai/agents
+	url = https://github.com/fractionaxapp/ai.git
