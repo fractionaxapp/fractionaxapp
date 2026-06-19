@@ -28,6 +28,20 @@ jobs:
         with:
           auto-install: true
 
+      # Shared cache across runs: moon's task cache plus the pnpm/uv download stores.
+      # (For true cross-machine moon remote caching, configure `unstable_remote` in
+      # .moon/workspace.yml against a cache backend + secret.)
+      - name: Restore moon and dependency caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            .moon/cache
+            ~/.local/share/pnpm/store
+            ~/.cache/uv
+          key: ci-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'libs/py-core/uv.lock') }}
+          restore-keys: |
+            ci-${{ runner.os }}-
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
