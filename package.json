@@ -19,6 +19,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "submodule:add": "bash scripts/add-submodule.sh",
+    "submodule:bump": "bash scripts/bump-submodule.sh",
     "submodule:sync": "git submodule update --init --recursive --remote"
   },
   "devDependencies": {
