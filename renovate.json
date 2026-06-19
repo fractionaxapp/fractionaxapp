@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["local>fractionaxapp/fractionaxapp//renovate-presets/default"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Keep node pinned in .prototools fresh",
+      "fileMatch": ["(^|/)\\.prototools$"],
+      "matchStrings": ["node\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep pnpm pinned in .prototools fresh",
+      "fileMatch": ["(^|/)\\.prototools$"],
+      "matchStrings": ["pnpm\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "pnpm",
+      "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep python pinned in .prototools fresh",
+      "fileMatch": ["(^|/)\\.prototools$"],
+      "matchStrings": ["python\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "python",
+      "datasourceTemplate": "python-version"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep uv pinned in .prototools fresh",
+      "fileMatch": ["(^|/)\\.prototools$"],
+      "matchStrings": ["uv\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "uv",
+      "datasourceTemplate": "pypi"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep moon pinned in .prototools fresh",
+      "fileMatch": ["(^|/)\\.prototools$"],
+      "matchStrings": ["moon\\s*=\\s*\"(?<currentValue>[^\"]+)\""],
+      "depNameTemplate": "moonrepo/moon",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v?(?<version>.+)$"
+    }
+  ]
+}
