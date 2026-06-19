@@ -7,3 +7,6 @@
 [submodule "ai"]
 	path = ai
 	url = https://github.com/fractionaxapp/ai.git
+[submodule "services/gateway"]
+	path = services/gateway
+	url = https://github.com/fractionaxapp/gateway.git
