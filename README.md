@@ -25,7 +25,8 @@ full decision record.
 fractionaxapp/
 ├── apps/         # User-facing apps          (submodules: web, mobile, admin…)
 ├── services/     # Backend services & APIs   (submodules: api, gateway…)   — polyglot
-├── ai/           # AI / ML workloads         (submodules: agents, training…) — mostly Python
+├── ai/           # AI tier — `ai` umbrella submodule, nested service submodules:
+│   └── agents/   #   fractionaxapp/agents — Claude agents service (Python)
 ├── packages/     # Shared in-repo TS packages (NOT submodules)
 │   ├── tsconfig/ #   @fractionax/tsconfig — base TS configs
 │   ├── config/   #   @fractionax/config   — shared ESLint + Prettier
@@ -35,12 +36,14 @@ fractionaxapp/
 │   └── py-core/  #   fractionax-core      — shared Python primitives
 ├── .moon/        # moon workspace & toolchain config (tasks are per-project)
 ├── .prototools   # pinned toolchain versions
-└── scripts/      # automation (add-submodule, …)
+└── scripts/      # automation (add-submodule, bump-submodule, …)
 ```
 
 > **Submodules vs. packages:** `packages/` and `libs/` are vendored *in this repo* —
 > shared building blocks. `apps/`, `services/`, and `ai/` hold *submodules* — independent
-> repos referenced by commit SHA.
+> repos referenced by commit SHA. The `ai` tier is **nested** (`ai` umbrella →
+> `ai/agents`), so clone with `--recurse-submodules` and bump pointers with
+> `pnpm submodule:bump <path>` (see [CONTRIBUTING.md](CONTRIBUTING.md)).
 
 ## Getting started
 

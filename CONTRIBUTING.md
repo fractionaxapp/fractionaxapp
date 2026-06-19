@@ -10,21 +10,61 @@ proto install      # install pinned node, pnpm, python, uv, moon
 pnpm run setup     # full bootstrap
 ```
 
-## Working in a submodule
+## Cloning
 
-Submodules are independent repos. To make changes:
+The meta-repo has **nested** submodules (see below), so always clone recursively:
 
 ```bash
-cd apps/web
-git checkout -b my-feature      # work on a real branch, not detached HEAD
-# …commit & push in the submodule repo…
-cd ../..
-git add apps/web                # record the new submodule SHA in the meta-repo
-git commit -m "chore: bump apps/web to <sha>"
+git clone --recurse-submodules https://github.com/fractionaxapp/fractionaxapp.git
+# already cloned shallow? →
+pnpm submodule:sync   # git submodule update --init --recursive --remote
+```
+
+## Submodule layout
+
+Most submodules are flat (`apps/web`, `services/api`). The AI tier is **nested**:
+the `ai` umbrella repo is a submodule of the meta-repo, and each AI service is a
+submodule of `ai`:
+
+```
+ai/            → fractionaxapp/ai      (umbrella — just submodule pointers)
+└── agents/    → fractionaxapp/agents  (the actual service; moon project "agents")
+```
+
+So `ai/agents` is **two** submodules deep. It still resolves at `ai/agents` and as
+the moon project `agents`, so task commands are unchanged.
+
+## Working in a submodule
+
+Submodules are independent repos. To make and land a change:
+
+```bash
+cd ai/agents
+git checkout main               # work on a branch, not detached HEAD
+# …make changes, commit, and push in the submodule repo…
+git push origin main
+```
+
+Then record the new SHA in every parent up to the meta-repo. For a flat submodule
+that's one bump; for a nested one (`ai/agents`) it's the whole chain
+(`agents → ai → meta`). The helper does the entire chain — checkout branch, stage,
+commit, push — at each level:
+
+```bash
+pnpm submodule:bump ai/agents   # or: apps/web, services/api
+```
+
+Doing it by hand for a flat submodule:
+
+```bash
+git add apps/web
+git commit -m "chore(web): Bump web submodule to <sha>"
+git push
 ```
 
 CI in the meta-repo pins submodules by SHA, so bumping the pointer is an explicit,
-reviewable step.
+reviewable step. The bump helper only moves pointers — commit and push the
+submodule's own changes first.
 
 ## Project conventions
 
