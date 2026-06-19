@@ -1,3 +1,6 @@
 [submodule "apps/web"]
 	path = apps/web
 	url = https://github.com/fractionaxapp/web.git
+[submodule "services/api"]
+	path = services/api
+	url = https://github.com/fractionaxapp/api.git
