@@ -3,6 +3,7 @@
   "extends": ["config:recommended"],
   "semanticCommits": "enabled",
   "commitMessageAction": "Update",
+  "commitMessageLowerCase": "never",
   "labels": ["dependencies"],
   "prConcurrentLimit": 6,
   "prHourlyLimit": 3,
