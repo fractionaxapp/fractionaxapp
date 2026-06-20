@@ -4,7 +4,6 @@
   "semanticCommits": "enabled",
   "commitMessageAction": "Update",
   "labels": ["dependencies"],
-  "schedule": ["before 6am on monday"],
   "prConcurrentLimit": 6,
   "prHourlyLimit": 3,
   "packageRules": [
