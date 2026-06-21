@@ -2,7 +2,7 @@
 # Install proto (https://moonrepo.dev/proto) then run `proto install` at the repo root.
 # Bump versions here and every contributor/CI picks them up automatically.
 
-node = "22.16.0"
+node = "24.17.0"
 pnpm = "10.11.0"
 python = "3.13.3"
 uv = "0.7.8"
