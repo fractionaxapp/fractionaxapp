@@ -15,7 +15,7 @@ jobs:
     name: Lint, typecheck, test (affected)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           # Full history so moon can diff against the base for affected-project
           # detection. Submodules are intentionally NOT fetched: this CI validates
@@ -32,7 +32,7 @@ jobs:
       # (For true cross-machine moon remote caching, configure `unstable_remote` in
       # .moon/workspace.yml against a cache backend + secret.)
       - name: Restore moon and dependency caches
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             .moon/cache
