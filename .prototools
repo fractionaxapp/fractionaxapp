@@ -3,7 +3,7 @@
 # Bump versions here and every contributor/CI picks them up automatically.
 
 node = "22.23.0"
-pnpm = "10.34.4"
+pnpm = "11.8.0"
 python = "3.14.6"
 uv = "0.11.23"
 moon = "2.3.4"
