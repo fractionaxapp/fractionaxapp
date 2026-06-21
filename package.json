@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Fractionax polyglot meta-monorepo — orchestrates submodule projects across Node/TS, Python and AI stacks via moon.",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.34.4",
   "engines": {
     "node": ">=22",
     "pnpm": ">=10"
