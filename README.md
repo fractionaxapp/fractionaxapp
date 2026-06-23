@@ -27,13 +27,16 @@ fractionaxapp/
 ├── services/     # Backend services & APIs   (submodules: api, gateway…)   — polyglot
 ├── ai/           # AI tier — `ai` umbrella submodule, nested service submodules:
 │   └── agents/   #   fractionaxapp/agents — Claude agents service (Python)
+├── onchain/      # Solana programs (Anchor)   (submodule) — own Rust toolchain, not moon-managed
 ├── packages/     # Shared in-repo TS packages (NOT submodules)
 │   ├── tsconfig/ #   @fractionax/tsconfig — base TS configs
 │   ├── config/   #   @fractionax/config   — shared ESLint + Prettier
 │   ├── core/     #   @fractionax/core     — shared TS utils/types
+│   ├── domain/   #   @fractionax/domain   — shared domain models (Zod)
+│   ├── solana/   #   @fractionax/solana   — Solana client (web3.js)
 │   └── ui/       #   @fractionax/ui       — shared React component library
 ├── libs/         # Shared in-repo libs in other languages
-│   └── py-core/  #   fractionax-core      — shared Python primitives
+│   └── py-core/  #   fractionax-core      — shared Python primitives + domain models
 ├── .moon/        # moon workspace & toolchain config (tasks are per-project)
 ├── .prototools   # pinned toolchain versions
 └── scripts/      # automation (add-submodule, bump-submodule, …)

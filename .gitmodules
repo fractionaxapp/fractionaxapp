@@ -13,3 +13,6 @@
 [submodule "apps/mobile"]
 	path = apps/mobile
 	url = https://github.com/fractionaxapp/mobile.git
+[submodule "onchain"]
+	path = onchain
+	url = https://github.com/fractionaxapp/onchain.git
