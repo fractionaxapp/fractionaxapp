@@ -14,3 +14,4 @@ overrides:
 # pnpm 11 blocks dependency build scripts unless explicitly allowed.
 allowBuilds:
   esbuild: true
+  sharp: true # Expo image tooling — fetches a prebuilt native binary.
