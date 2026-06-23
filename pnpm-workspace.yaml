@@ -13,8 +13,10 @@ overrides:
 
 # pnpm 11 blocks dependency build scripts unless explicitly allowed.
 allowBuilds:
+  bufferutil: false # optional native ws acceleration (Solana RPC); JS fallback is fine
   esbuild: true
   sharp: true # Expo image tooling — fetches a prebuilt native binary.
+  utf-8-validate: false # optional native ws acceleration (Solana RPC); JS fallback is fine
 
 minimumReleaseAgeExclude:
   - '@eslint-react/ast@5.9.2'

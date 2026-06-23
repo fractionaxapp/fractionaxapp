@@ -4,7 +4,35 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-__all__ = ["Money", "add_money"]
+from fractionax_core.domain import (
+    Asset,
+    Deal,
+    DealFilter,
+    InvestmentIntent,
+    InvestmentMemo,
+    Investor,
+    InvoiceAsset,
+    IpRoyaltyAsset,
+    MemoRisk,
+    NavQuote,
+    RevenueShareAsset,
+)
+
+__all__ = [
+    "Money",
+    "add_money",
+    "Asset",
+    "IpRoyaltyAsset",
+    "InvoiceAsset",
+    "RevenueShareAsset",
+    "Deal",
+    "DealFilter",
+    "Investor",
+    "NavQuote",
+    "MemoRisk",
+    "InvestmentMemo",
+    "InvestmentIntent",
+]
 
 
 @dataclass(frozen=True, slots=True)

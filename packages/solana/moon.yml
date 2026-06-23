@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://moonrepo.dev/schemas/project.json
+layer: "library"
+language: "typescript"
+stack: "infrastructure"
+tags: ["shared", "ts", "ts-library"]
+toolchains:
+  default: ["node"]
+project:
+  name: "solana"
+  description: "Framework-agnostic Solana client (cluster connection, program IDs)."
+
+fileGroups:
+  sources:
+    - "src/**/*"
+  tests:
+    - "src/**/*.test.ts"
+
+tasks:
+  build:
+    command: "pnpm exec tsc --build"
+    inputs:
+      - "@group(sources)"
+      - "tsconfig.json"
+    outputs:
+      - "dist"
+  test:
+    command: "pnpm exec vitest run"
+    inputs:
+      - "@group(sources)"
+      - "@group(tests)"
+  lint:
+    command: "pnpm exec eslint ."
+    inputs:
+      - "@group(sources)"
+      - "eslint.config.js"
+  typecheck:
+    command: "pnpm exec tsc --noEmit"
+    inputs:
+      - "@group(sources)"
+      - "tsconfig.json"
