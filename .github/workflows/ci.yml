@@ -46,7 +46,20 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Check affected projects
-        run: moon ci --color
         env:
-          MOON_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          EVENT_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           MOON_HEAD: ${{ github.sha }}
+        run: |
+          base="$EVENT_BASE"
+          # A force-push (history rewrite) or new branch can leave the base SHA
+          # unreachable; moon's affected-detection then dies on `bad object`.
+          # Fall back to HEAD~1 (or no base) so CI stays robust.
+          if [ -z "$base" ] || ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+            echo "Base '$base' is unavailable — falling back to HEAD~1."
+            base="$(git rev-parse --verify --quiet HEAD~1 || true)"
+          fi
+          if [ -n "$base" ]; then
+            MOON_BASE="$base" moon ci --color
+          else
+            moon ci --color
+          fi
