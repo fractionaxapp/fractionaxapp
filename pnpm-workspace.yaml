@@ -9,9 +9,35 @@ packages:
 
 # pnpm 11 no longer reads the "pnpm" field in package.json — settings live here.
 overrides:
-  eslint: "^9.28.0"
+  eslint: "^10.0.0"
 
 # pnpm 11 blocks dependency build scripts unless explicitly allowed.
 allowBuilds:
   esbuild: true
   sharp: true # Expo image tooling — fetches a prebuilt native binary.
+
+minimumReleaseAgeExclude:
+  - '@eslint-react/ast@5.9.2'
+  - '@eslint-react/core@5.9.2'
+  - '@eslint-react/eslint-plugin@5.9.2'
+  - '@eslint-react/eslint@5.9.2'
+  - '@eslint-react/jsx@5.9.2'
+  - '@eslint-react/shared@5.9.2'
+  - '@eslint-react/var@5.9.2'
+  - '@typescript-eslint/eslint-plugin@8.62.0'
+  - '@typescript-eslint/parser@8.62.0'
+  - '@typescript-eslint/project-service@8.62.0'
+  - '@typescript-eslint/scope-manager@8.62.0'
+  - '@typescript-eslint/tsconfig-utils@8.62.0'
+  - '@typescript-eslint/type-utils@8.62.0'
+  - '@typescript-eslint/types@8.62.0'
+  - '@typescript-eslint/typescript-estree@8.62.0'
+  - '@typescript-eslint/utils@8.62.0'
+  - '@typescript-eslint/visitor-keys@8.62.0'
+  - eslint-plugin-react-dom@5.9.2
+  - eslint-plugin-react-jsx@5.9.2
+  - eslint-plugin-react-naming-convention@5.9.2
+  - eslint-plugin-react-rsc@5.9.2
+  - eslint-plugin-react-web-api@5.9.2
+  - eslint-plugin-react-x@5.9.2
+  - typescript-eslint@8.62.0
