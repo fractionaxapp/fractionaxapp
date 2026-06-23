@@ -95,3 +95,11 @@ and any `dependsOn` (e.g. `core`, `ui`, `py-core`). moon discovers it automatica
 the globs in `.moon/workspace.yml`.
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for conventions.
+
+## Architecture
+
+- [`docs/architecture/agent-system.md`](docs/architecture/agent-system.md) — the
+  agent system: the agents, Copilot orchestration, deal lifecycle, NAV oracle, and
+  the LLM provider/failover layer.
+- [`docs/adr/0001-monorepo-tooling.md`](docs/adr/0001-monorepo-tooling.md) — meta-monorepo with moon + submodules.
+- [`docs/adr/0002-ai-tier-stack.md`](docs/adr/0002-ai-tier-stack.md) — AI tier on the Anthropic SDK + FastAPI with MiniMax failover.
