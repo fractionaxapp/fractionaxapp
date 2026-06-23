@@ -14,11 +14,13 @@ export type IntentAction = z.infer<typeof IntentAction>;
  */
 export const InvestmentIntent = z.object({
   action: IntentAction,
+  // Unset fields are serialized as `null` by the Python agents (Pydantic
+  // `None`), so accept both `null` and absent via `.nullish()`.
   /** Amount in minor units, when the user names one. */
-  amountMinor: z.number().int().positive().optional(),
-  currency: Currency.optional(),
-  riskTier: RiskTier.optional(),
-  jurisdiction: Jurisdiction.optional(),
-  assetKind: AssetKind.optional(),
+  amountMinor: z.number().int().positive().nullish(),
+  currency: Currency.nullish(),
+  riskTier: RiskTier.nullish(),
+  jurisdiction: Jurisdiction.nullish(),
+  assetKind: AssetKind.nullish(),
 });
 export type InvestmentIntent = z.infer<typeof InvestmentIntent>;
