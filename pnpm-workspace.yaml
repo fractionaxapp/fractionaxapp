@@ -6,3 +6,11 @@ packages:
   - "services/*"
   - "ai/*"
   - "libs/*"
+
+# pnpm 11 no longer reads the "pnpm" field in package.json — settings live here.
+overrides:
+  eslint: "^9.28.0"
+
+# pnpm 11 blocks dependency build scripts unless explicitly allowed.
+allowBuilds:
+  esbuild: true
