@@ -20,7 +20,7 @@ describe('cluster', () => {
 });
 
 describe('program', () => {
-  it('exposes a valid base58 program id', () => {
-    expect(FRACTIONAX_PROGRAM_ID.toBase58()).toHaveLength(32);
+  it('exposes a valid 32-byte program id', () => {
+    expect(FRACTIONAX_PROGRAM_ID.toBytes()).toHaveLength(32);
   });
 });
