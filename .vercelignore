@@ -1,0 +1,20 @@
+# NOTE: when this file exists, Vercel ignores .gitignore — so list ALL heavy
+# build/artifact dirs here, plus the submodules the web build doesn't need.
+.git
+.moon
+.vercel
+node_modules
+.next
+.venv
+dist
+target
+__pycache__
+*.tsbuildinfo
+coverage
+
+# Submodules the web app does not depend on. Root-anchored (leading /) so they
+# don't also match nested dirs like apps/web/app/onchain.
+/apps/mobile
+/services
+/ai
+/onchain
