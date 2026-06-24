@@ -1,0 +1,24 @@
+# Container for the FractionAX agents service (FastAPI + Anthropic/MiniMax).
+#
+# Build context MUST be the meta-repo root so the path dependency on the shared
+# libs/py-core resolves:
+#   docker build -f deploy/Dockerfile.agents -t fractionax-agents .
+#
+# Runtime config (env): ANTHROPIC_API_KEY and/or MINIMAX_API_KEY, optional
+# NAV_ORACLE_PROVIDER / PYTH_HERMES_URL. Hosts inject $PORT.
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
+
+WORKDIR /app
+
+# Shared domain library — the agents service depends on it via a relative path
+# (ai/agents/pyproject.toml: fractionax-core = { path = "../../libs/py-core" }),
+# so the directory layout here must mirror the meta-repo.
+COPY libs/py-core /app/libs/py-core
+COPY ai/agents /app/ai/agents
+
+WORKDIR /app/ai/agents
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+RUN uv sync --no-dev --frozen
+
+EXPOSE 8000
+CMD ["sh", "-c", "uv run uvicorn fractionax_agents.server:app --host 0.0.0.0 --port ${PORT:-8000}"]

@@ -1,0 +1,12 @@
+# Keep the Docker build context lean (the context is the whole meta-repo).
+**/node_modules
+**/.venv
+**/dist
+**/.next
+**/target
+**/__pycache__
+**/.moon/cache
+**/.git
+**/.turbo
+**/coverage
+**/*.tsbuildinfo

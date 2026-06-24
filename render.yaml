@@ -1,0 +1,23 @@
+# Render Blueprint for the FractionAX agents service (FastAPI + Anthropic/MiniMax).
+#
+# Render builds the Docker image from deploy/Dockerfile.agents with the repo root
+# as the build context, so both the agents service (ai/agents submodule) and the
+# shared libs/py-core are present. Render initializes git submodules automatically.
+#
+# Use via: Render dashboard → New → Blueprint → select this repo. Set the
+# MINIMAX_API_KEY (and/or ANTHROPIC_API_KEY) secret in the dashboard.
+services:
+  - type: web
+    name: fractionax-agents
+    runtime: docker
+    dockerfilePath: ./deploy/Dockerfile.agents
+    dockerContext: .
+    plan: free # spins down when idle (cold starts); use 'starter' to stay warm
+    region: oregon
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: MINIMAX_API_KEY
+        sync: false # set as a secret in the dashboard
+      - key: NAV_ORACLE_PROVIDER
+        value: fundamental
