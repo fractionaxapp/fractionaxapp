@@ -8,13 +8,21 @@
 # NAV_ORACLE_PROVIDER / PYTH_HERMES_URL. Hosts inject $PORT.
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim
 
+# git to clone the agents service (it lives in its own repo and is a submodule of
+# the meta-repo; hosts don't initialize submodules during Docker builds).
+RUN apt-get update && apt-get install -y --no-install-recommends git \
+  && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Shared domain library — the agents service depends on it via a relative path
-# (ai/agents/pyproject.toml: fractionax-core = { path = "../../libs/py-core" }),
-# so the directory layout here must mirror the meta-repo.
+# Shared domain library — in-repo, present in the build context. The agents
+# service depends on it via a relative path (../../libs/py-core), so the layout
+# here mirrors the meta-repo.
 COPY libs/py-core /app/libs/py-core
-COPY ai/agents /app/ai/agents
+# Agents service — cloned directly so the build doesn't depend on submodule init.
+ARG AGENTS_REF=main
+RUN git clone --depth 1 --branch "$AGENTS_REF" \
+  https://github.com/fractionaxapp/agents.git /app/ai/agents
 
 WORKDIR /app/ai/agents
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
