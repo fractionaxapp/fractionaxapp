@@ -1,0 +1,30 @@
+name: Keep-alive
+
+# Pings the free-tier agents service so it doesn't spin down between demos
+# (Render sleeps after ~15 min idle; a cold start then costs ~30–60s on the first
+# request). Best-effort: GitHub may delay scheduled runs under load, so the paid
+# Render `starter` plan is the guaranteed fix. This repo is public, so Actions
+# minutes are free. The step never fails — it only logs the status — to avoid
+# false alarms on a transient cold start.
+on:
+  schedule:
+    - cron: "*/5 * * * *" # every 5 minutes
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: keep-alive
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    name: Ping agents
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping agents /health
+        run: |
+          url="https://fractionax-agents.onrender.com/health"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 120 "$url" || echo "000")
+          echo "$(date -u '+%Y-%m-%d %H:%M:%S UTC')  ${url} -> HTTP ${code}"
