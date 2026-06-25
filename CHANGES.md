@@ -42,24 +42,27 @@ Next.js web app as a thin streaming client. This is a deliberate, kept decision.
 | Deal / Investor / NAV / Intent / Memo models | 🟢 | `packages/domain/*` (TS) ↔ `libs/py-core/.../domain.py` (Python) |
 | Deal discovery dashboard + Copilot UX | 🟢 | `/deals`, `/copilot`, and a live Copilot on the home hero |
 | On-chain program (devnet) | 🟢 | Anchor program `Aqvk9Br2PPoTzGZbnYVxnwgpGTzPZTdcowpN9gdkRXGP` deployed to devnet; `initialize` + `register_deal`; registry PDA live |
-| Architecture documentation (agent system design) | 🟡 | Per-service READMEs + ADR-0001 (tooling); a dedicated agent-system design doc is still worth adding |
+| Architecture documentation (agent system design) | 🟢 | `docs/architecture/agent-system.md` (the agents, orchestration, deal lifecycle) + per-service READMEs + ADR-0001 |
 
 ¹ Sourcing runs on a **seed catalogue** (5 assets/deals) — the filtering is real; live partner connectors are M2/M3.
 ² Pyth adapter makes a real Hermes call when an `asset_id → feed` is configured; with none mapped it falls back to the fundamental oracle.
 
 **Overall: Milestone 1 is feature-complete on devnet.** The deliverables — live Copilot UX
 (NL → deal discovery → memo), agent orchestration on devnet, and deal infrastructure ready
-for onboarding — are met. What's left is production deploy + live-data wiring.
+for onboarding — are met, and the stack is **deployed live** (see §4). What's left is
+live-data wiring (M2).
 
 ---
 
 ## 3. Remaining work
 
-- [ ] **Go live** — deploy the web (Vercel) + agents (Render); see §4. *(needs dashboard credentials)*
-- [ ] **Live deal connectors** — replace the seed catalogue with real sourcing (M2 boundary).
-- [ ] **Map Pyth feeds** — populate `PYTH_FEEDS` (`asset_id → price-feed id`) to switch NAV from fundamental to live.
-- [ ] **Memo unit test** — the only agent module without a direct test (`agents/memo.py`).
-- [ ] **Agent-system design doc** — `docs/architecture/agent-system.md` (the 6-agent design, deal lifecycle).
+- [x] **Go live** — web on Vercel (`staging.fractionax.app`) + agents on Render (`fractionax-agents.onrender.com`), wired via `AGENTS_URL`. See §4.
+- [x] **Memo unit test** — `ai/agents/tests/test_memo.py` asserts the memo's valuation is the NAV-derived figure, not the LLM's.
+- [x] **Agent-system design doc** — `docs/architecture/agent-system.md`.
+- [ ] **Warm the demo** — upgrade the Render service to `starter` (no idle spin-down). *Blocked: Render requires a payment method on the account first.*
+- [ ] **Live deal connectors** — replace the seed catalogue with real sourcing (**M2 boundary**, not an M1 gap).
+- [ ] **Map Pyth feeds** — *not applicable to the current catalogue.* The seed alternative assets (royalties/invoices/revenue-share) have no market price feed, so fundamental NAV is correct; the Pyth adapter is wired for assets that track a listed instrument.
+- [ ] **Dashboard auth** — deferred by choice (open dashboard for the demo); a wallet-connect gate can drop in later.
 
 ---
 
