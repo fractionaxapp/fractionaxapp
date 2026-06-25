@@ -8,7 +8,7 @@ name: Keep-alive
 # false alarms on a transient cold start.
 on:
   schedule:
-    - cron: "*/5 * * * *" # every 5 minutes
+    - cron: "*/12 * * * *" # every 12 minutes
   workflow_dispatch:
 
 permissions:
