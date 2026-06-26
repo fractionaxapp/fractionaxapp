@@ -46,3 +46,7 @@ pnpm-debug.log*
 !.vscode/settings.json
 *.swp
 Thumbs.db
+
+# Local artifacts (Vercel link + generated brand-palette preview)
+.vercel/
+.brand-preview/
