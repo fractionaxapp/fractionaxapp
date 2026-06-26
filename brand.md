@@ -28,18 +28,24 @@ media query, and `.dark`. All foreground/background pairs pass **WCAG AA**
 
 ## Typography
 
-A three-voice system — **serif display, sans body, mono data** — the classic
-"luxury editorial × terminal" pairing.
+Direction: **cyber / brutalist** — raw, high-contrast, terminal-flavored.
 
-- **Serif (display):** Fraunces (`next/font/google`, optical sizing) — page titles
-  (`h1`) and section headings. High stroke contrast = the premium/editorial voice.
-  `--font-serif`, utility `font-serif`. Wired in `app/layout.tsx`.
-- **Sans:** Geist (`geist/font/sans`) — UI and body text. `--font-sans`.
-- **Mono:** Geist Mono (`geist/font/mono`) — financial numerics, addresses, code,
-  and the UPPERCASE `kicker` micro-labels. `--font-mono`.
+- **Mono (display + data):** Geist Mono (`geist/font/mono`) — page titles (`h1`)
+  and section headings are `font-mono uppercase` (the cyber-terminal/brutalist
+  voice), plus all numerics, addresses, code, and the UPPERCASE `kicker` labels.
+- **Sans:** Geist (`geist/font/sans`) — body and UI text. `--font-sans`.
 
-Use `font-serif` for display headings, `font-mono tabular-nums` for any compared
-numbers (yields, amounts, balances), and the `.kicker` class for eyebrow labels.
+Use `font-mono uppercase` for display headings, `font-mono tabular-nums` for any
+compared numbers (yields, amounts, balances), and the `.kicker` class for eyebrows.
+
+## Visual language — brutalist
+
+- **Hard corners** — `--radius: 0` (everything is square).
+- **Thick borders** — `border-2` on cards and key surfaces.
+- **Hard offset shadows** — `.shadow-card` is a solid 3px cast (no blur);
+  `.shadow-brutal` is a loud 6px **neon-teal** cast for hero preview / CTA.
+- **Neon-teal HUD grid** — `.blueprint-grid` draws teal 48px gridlines behind the
+  hero; `.bracket` adds thick teal registration corners.
 
 ## Logo
 
