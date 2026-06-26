@@ -28,10 +28,18 @@ media query, and `.dark`. All foreground/background pairs pass **WCAG AA**
 
 ## Typography
 
-- **Sans:** Geist (`geist/font/sans`) — UI text. Wired in `app/layout.tsx`, exposed as `--font-sans`.
-- **Mono:** Geist Mono (`geist/font/mono`) — financial numerics, addresses, code. `--font-mono`.
+A three-voice system — **serif display, sans body, mono data** — the classic
+"luxury editorial × terminal" pairing.
 
-Use `font-mono tabular-nums` for any compared numbers (yields, amounts, balances).
+- **Serif (display):** Fraunces (`next/font/google`, optical sizing) — page titles
+  (`h1`) and section headings. High stroke contrast = the premium/editorial voice.
+  `--font-serif`, utility `font-serif`. Wired in `app/layout.tsx`.
+- **Sans:** Geist (`geist/font/sans`) — UI and body text. `--font-sans`.
+- **Mono:** Geist Mono (`geist/font/mono`) — financial numerics, addresses, code,
+  and the UPPERCASE `kicker` micro-labels. `--font-mono`.
+
+Use `font-serif` for display headings, `font-mono tabular-nums` for any compared
+numbers (yields, amounts, balances), and the `.kicker` class for eyebrow labels.
 
 ## Logo
 
