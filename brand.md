@@ -28,15 +28,17 @@ media query, and `.dark`. All foreground/background pairs pass **WCAG AA**
 
 ## Typography
 
-Direction: **cyber / brutalist** — raw, high-contrast, terminal-flavored.
+Direction: **terminal/blueprint × luxury editorial** — an editorial serif voice
+on a brutalist/terminal frame.
 
-- **Mono (display + data):** Geist Mono (`geist/font/mono`) — page titles (`h1`)
-  and section headings are `font-mono uppercase` (the cyber-terminal/brutalist
-  voice), plus all numerics, addresses, code, and the UPPERCASE `kicker` labels.
+- **Serif (display):** Fraunces (`next/font/google`, optical sizing) — page titles
+  (`h1`) and section headings, mixed-case. The luxury-editorial voice. `font-serif`.
 - **Sans:** Geist (`geist/font/sans`) — body and UI text. `--font-sans`.
+- **Mono (data + labels):** Geist Mono (`geist/font/mono`) — numerics, addresses,
+  code, and the UPPERCASE `.kicker` eyebrow labels. The terminal voice. `--font-mono`.
 
-Use `font-mono uppercase` for display headings, `font-mono tabular-nums` for any
-compared numbers (yields, amounts, balances), and the `.kicker` class for eyebrows.
+Use `font-serif` for display headings, `font-mono tabular-nums` for compared
+numbers (yields, amounts, balances), and `.kicker` for eyebrow labels.
 
 ## Visual language — brutalist
 
