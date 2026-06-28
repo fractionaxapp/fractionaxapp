@@ -17,7 +17,11 @@ fileGroups:
 
 tasks:
   build:
-    command: "pnpm exec tsc --build"
+    # Always re-emit. `tsc --build` is incremental and can leave a stale dist
+    # (e.g. dropping a newly-added field like Deal.assetClass) when its
+    # tsbuildinfo thinks the outputs are current — and moon then caches that
+    # stale dist, failing downstream typechecks in CI. --force re-emits fully.
+    command: "pnpm exec tsc --build --force"
     inputs:
       - "@group(sources)"
       - "tsconfig.json"
