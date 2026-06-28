@@ -73,6 +73,9 @@ class Deal(BaseModel):
     risk_tier: RiskTier
     status: DealStatus
     sourced_at: str
+    # Asset class (e.g. "real-estate", "stocks"). Optional for legacy seed deals;
+    # populated for catalogue deals so the discovery UI can group by class.
+    asset_class: str | None = None
 
 
 class DealFilter(BaseModel):

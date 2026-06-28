@@ -25,6 +25,9 @@ export const Deal = z.object({
   status: DealStatus,
   /** ISO 8601 timestamp the deal was sourced. */
   sourcedAt: z.string(),
+  /** Asset class slug (e.g. "real-estate", "stocks") for discovery grouping.
+   * Optional: legacy demo deals omit it; catalogue deals populate it. */
+  assetClass: z.string().optional(),
 });
 export type Deal = z.infer<typeof Deal>;
 
