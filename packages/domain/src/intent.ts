@@ -26,5 +26,7 @@ export const InvestmentIntent = z.object({
   minYieldPct: z.number().nonnegative().nullish(),
   /** rwa.xyz asset-class slug, when the user names an asset type. */
   assetClass: z.string().nullish(),
+  /** A specific deal named by the user, e.g. "draft a memo for <fund>". */
+  titleQuery: z.string().nullish(),
 });
 export type InvestmentIntent = z.infer<typeof InvestmentIntent>;

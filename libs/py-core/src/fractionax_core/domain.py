@@ -86,6 +86,7 @@ class DealFilter(BaseModel):
     min_yield_pct: float | None = None
     asset_class: str | None = None
     max_min_investment_minor: int | None = None
+    title_query: str | None = None  # match a specific named deal by title
 
 
 class Investor(BaseModel):
@@ -136,3 +137,4 @@ class InvestmentIntent(BaseModel):
     asset_kind: AssetKind | None = None
     min_yield_pct: float | None = Field(default=None, ge=0)
     asset_class: str | None = None
+    title_query: str | None = None  # a specific deal named by the user ("memo for X")
