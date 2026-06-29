@@ -22,5 +22,9 @@ export const InvestmentIntent = z.object({
   riskTier: RiskTier.nullish(),
   jurisdiction: Jurisdiction.nullish(),
   assetKind: AssetKind.nullish(),
+  /** Minimum projected annual yield %, when the user names a floor. */
+  minYieldPct: z.number().nonnegative().nullish(),
+  /** rwa.xyz asset-class slug, when the user names an asset type. */
+  assetClass: z.string().nullish(),
 });
 export type InvestmentIntent = z.infer<typeof InvestmentIntent>;

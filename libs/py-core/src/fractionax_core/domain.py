@@ -84,6 +84,7 @@ class DealFilter(BaseModel):
     jurisdiction: str | None = None
     risk_tier: RiskTier | None = None
     min_yield_pct: float | None = None
+    asset_class: str | None = None
     max_min_investment_minor: int | None = None
 
 
@@ -133,3 +134,5 @@ class InvestmentIntent(BaseModel):
     risk_tier: RiskTier | None = None
     jurisdiction: str | None = None
     asset_kind: AssetKind | None = None
+    min_yield_pct: float | None = Field(default=None, ge=0)
+    asset_class: str | None = None
