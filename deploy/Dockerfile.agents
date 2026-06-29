@@ -20,6 +20,11 @@ WORKDIR /app
 # here mirrors the meta-repo.
 COPY libs/py-core /app/libs/py-core
 # Agents service — cloned directly so the build doesn't depend on submodule init.
+# Cache-bust: this ADD fetches agents' latest main-commit metadata, whose content
+# changes whenever main advances. Docker then invalidates the cached clone layer
+# below, so a NORMAL redeploy re-clones the newest agent code — no "Clear build
+# cache & deploy" required. (agents is a public repo, so the API needs no auth.)
+ADD https://api.github.com/repos/fractionaxapp/agents/commits/main /tmp/agents-main.json
 ARG AGENTS_REF=main
 RUN git clone --depth 1 --branch "$AGENTS_REF" \
   https://github.com/fractionaxapp/agents.git /app/ai/agents

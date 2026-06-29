@@ -1,8 +1,12 @@
 # Render Blueprint for the FractionAX agents service (FastAPI + Anthropic/MiniMax).
 #
 # Render builds the Docker image from deploy/Dockerfile.agents with the repo root
-# as the build context, so both the agents service (ai/agents submodule) and the
-# shared libs/py-core are present. Render initializes git submodules automatically.
+# as the build context (so the shared libs/py-core is present). The Dockerfile
+# clones the agents service from its own public repo rather than relying on
+# submodule init, and cache-busts that clone against agents' latest main commit —
+# so a NORMAL redeploy always picks up new agent code (no "Clear build cache &
+# deploy" needed). Docker-runtime services have no pre-build buildCommand, which is
+# why the submodule-freshness fix lives in the Dockerfile, not here.
 #
 # Use via: Render dashboard → New → Blueprint → select this repo. Set the
 # MINIMAX_API_KEY (and/or ANTHROPIC_API_KEY) secret in the dashboard.
