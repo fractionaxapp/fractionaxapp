@@ -55,8 +55,8 @@ SVGs in `apps/web/public/brand/fractionax-logo-full-{primary,secondary,accent,li
 The `Logo` component (`components/logo.tsx`) shows the **dark** mark on light backgrounds and the
 **light** mark on dark backgrounds. Wired into the marketing + dashboard nav.
 
-_TODO: add a square mark-only SVG for `app/icon.svg` (favicon) + `app/apple-icon.png` —
-the current full wordmark is too wide for a square icon._
+The favicon (`app/icon.svg`) and iOS icon (`app/apple-icon.tsx`) use the logo's "f"
+lettermark (white) on a square brand-teal tile — `--radius: 0`, on-brand brutalist.
 
 ## Tone & voice
 
@@ -73,4 +73,4 @@ But always reinforce control — agents propose, the user approves. Gold is for 
 - **Do** use `text-brand-gold` for yield/positive value, sparingly.
 - **Do** keep numbers in `font-mono tabular-nums`.
 - **Don't** hardcode hex — use the tokens (`bg-primary`, `text-muted-foreground`, …).
-- **Don't** put the wide wordmark in a square space — use a mark-only asset (see TODO).
+- **Don't** put the wide wordmark in a square space — use the "f" lettermark (`app/icon.svg`).
