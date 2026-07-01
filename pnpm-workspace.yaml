@@ -20,6 +20,15 @@ allowBuilds:
   sharp: true # Expo image tooling — fetches a prebuilt native binary.
   utf-8-validate: false # optional native ws acceleration (Solana RPC); JS fallback is fine
 
+# Supply-chain hardening (pnpm 10.16+): wait 7 days before installing a newly
+# published version, block transitive deps from non-registry (git/http/tarball)
+# sources, and never let an update silently downgrade these settings.
+# minimumReleaseAge affects resolution only — frozen-lockfile installs (CI) are
+# unaffected; the recently-published versions we do depend on are listed below.
+minimumReleaseAge: 10080 # minutes = 7 days
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
+
 minimumReleaseAgeExclude:
   - '@eslint-react/ast@5.9.2'
   - '@eslint-react/core@5.9.2'
