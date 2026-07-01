@@ -29,6 +29,19 @@ minimumReleaseAge: 10080 # minutes = 7 days
 blockExoticSubdeps: true
 trustPolicy: no-downgrade
 
+# Established, audited packages whose current npm release predates trust
+# attestations, so no-downgrade flags them against a fresh baseline (noble
+# crypto, jose, semver, ua-parser-js, undici-types, Privy's slow-redact).
+# Allowlist them so the policy still guards every other entry.
+trustPolicyExclude:
+  - '@noble/curves@1.8.0'
+  - '@noble/hashes@1.7.0'
+  - jose@4.15.9
+  - semver@6.3.1
+  - slow-redact@0.3.2
+  - ua-parser-js@1.0.41
+  - undici-types@6.21.0
+
 minimumReleaseAgeExclude:
   - '@eslint-react/ast@5.9.2'
   - '@eslint-react/core@5.9.2'
