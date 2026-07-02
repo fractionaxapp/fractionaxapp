@@ -31,7 +31,9 @@ RUN git clone --depth 1 --branch "$AGENTS_REF" \
 
 WORKDIR /app/ai/agents
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
-RUN uv sync --no-dev --frozen
+# `postgres` extra installs psycopg so the deal catalogue can use a Postgres
+# DATABASE_URL (Neon) in production; it falls back to SQLite when unset.
+RUN uv sync --no-dev --frozen --extra postgres
 
 EXPOSE 8000
 CMD ["sh", "-c", "uv run uvicorn fractionax_agents.server:app --host 0.0.0.0 --port ${PORT:-8000}"]
