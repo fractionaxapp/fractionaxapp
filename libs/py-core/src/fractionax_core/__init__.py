@@ -6,6 +6,9 @@ from dataclasses import dataclass
 
 from fractionax_core.domain import (
     Asset,
+    ComplianceDecision,
+    ComplianceProfile,
+    ComplianceReason,
     Deal,
     DealFilter,
     InvestmentIntent,
@@ -13,9 +16,11 @@ from fractionax_core.domain import (
     Investor,
     InvoiceAsset,
     IpRoyaltyAsset,
+    JurisdictionRule,
     MemoRisk,
     NavQuote,
     RevenueShareAsset,
+    TransferCheck,
 )
 
 __all__ = [
@@ -32,6 +37,11 @@ __all__ = [
     "MemoRisk",
     "InvestmentMemo",
     "InvestmentIntent",
+    "ComplianceReason",
+    "ComplianceProfile",
+    "ComplianceDecision",
+    "JurisdictionRule",
+    "TransferCheck",
 ]
 
 

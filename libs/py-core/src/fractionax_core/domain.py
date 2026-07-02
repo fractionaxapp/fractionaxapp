@@ -17,6 +17,10 @@ DealStatus = Literal["sourced", "screening", "open", "funded", "closed"]
 NavSource = Literal["pyth", "switchboard", "manual"]
 IntentAction = Literal["invest", "discover", "rebalance", "quote"]
 Recommendation = Literal["invest", "pass", "watch"]
+KycStatus = Literal["unverified", "pending", "verified", "rejected"]
+AccreditationTier = Literal["retail", "accredited", "institutional"]
+OfferingRegime = Literal["reg_d", "reg_s", "reg_a"]
+ComplianceOutcome = Literal["allow", "deny"]
 
 
 class _AssetBase(BaseModel):
@@ -95,6 +99,10 @@ class Investor(BaseModel):
     jurisdiction: str = Field(min_length=2, max_length=2)
     accredited: bool = False
     risk_appetite: RiskTier
+    # Solana wallet the on-chain investor credential is keyed by (base58);
+    # optional until the investor connects a wallet.
+    wallet: str | None = None
+    kyc_status: KycStatus = "unverified"
 
 
 class NavQuote(BaseModel):
@@ -138,3 +146,61 @@ class InvestmentIntent(BaseModel):
     min_yield_pct: float | None = Field(default=None, ge=0)
     asset_class: str | None = None
     title_query: str | None = None  # a specific deal named by the user ("memo for X")
+
+
+class ComplianceReason(BaseModel):
+    """A single machine-readable reason contributing to a compliance decision."""
+
+    code: str  # stable code, e.g. "kyc_not_verified", "jurisdiction_blocked"
+    detail: str
+
+
+class ComplianceProfile(BaseModel):
+    """An investor's compliance profile — the off-chain source of truth the
+    Compliance Agent maintains and mirrors on-chain to the credential PDA."""
+
+    investor_id: str
+    jurisdiction: str = Field(min_length=2, max_length=2)
+    kyc_status: KycStatus
+    accreditation_tier: AccreditationTier
+    sanctions_clear: bool  # True if screened clear of sanctions/watchlist hits
+    screened_at: str
+
+
+class ComplianceDecision(BaseModel):
+    """The Compliance Agent's structured verdict for one investor against one deal.
+
+    ``outcome == "allow"`` is the gate the invest CTA and the on-chain gated
+    instruction both enforce.
+    """
+
+    investor_id: str
+    deal_id: str
+    outcome: ComplianceOutcome
+    kyc_status: KycStatus
+    accreditation_tier: AccreditationTier
+    regime: OfferingRegime
+    reasons: list[ComplianceReason]  # non-empty when outcome == "deny"
+    rationale: str
+    decided_at: str
+
+
+class JurisdictionRule(BaseModel):
+    """A jurisdiction-aware transfer/holding rule evaluated by the rules engine."""
+
+    regime: OfferingRegime
+    allowed_jurisdictions: list[str]  # empty means "any not blocked"
+    blocked_jurisdictions: list[str]
+    min_tier: AccreditationTier
+    asset_kinds: list[AssetKind]  # empty means all kinds
+    accredited_only_risk_tiers: list[RiskTier]
+
+
+class TransferCheck(BaseModel):
+    """Whether ``to`` may receive/hold a deal's fractional token (secondary market)."""
+
+    deal_id: str
+    from_investor_id: str
+    to_investor_id: str
+    allowed: bool
+    reasons: list[ComplianceReason]
